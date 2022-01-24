@@ -1,0 +1,41 @@
+<html>
+    <body>
+        <!--<p>Word of the day: {{word_day}}</p>-->
+
+        {% if counter > 0 %}
+            <p>Guesses so far:</p>
+            <div>
+            {% for guess in guesses_so_far %}
+                {% for g in guess %}
+                    {% if g[1] == 0 %}
+                        <span style="font-family:Arial;background-color:red;color:white;text-transform:uppercase;font-size:44">{{g[0]}}</span>
+                    {% elif g[1] == 1 %}
+                        <span style="font-family:Arial;background-color:orange;color:white;text-transform:uppercase;font-size:44">{{g[0]}}</span>
+                    {% else %}
+                        <span style="font-family:Arial;background-color:green;color:white;text-transform:uppercase;font-size:44">{{g[0]}}</span>
+                    {% endif %}
+                {% endfor %}
+                <p></p>
+            {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if play == 1 %}
+            <p>Enter your guess ({{counter+1}}/5):</p>
+            <form method="post" action=".">
+                <p><input name="guess" />
+                <input type="submit" name="action" value="Enter" />
+            </form>
+            {% if errors != "" %}
+                <p style="color:red">{{errors}}</p>
+            {% endif %}
+
+        {% else %}
+            <p>Word of the day: {{word_day}}</p>
+            <p>{{message}}</p>
+            <p><a href="/">Click here to play again</a>
+
+        {% endif %}
+
+    </body>
+</html>
